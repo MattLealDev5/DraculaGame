@@ -1,3 +1,5 @@
+sprite = sPlayer
+
 walkSpeed = 1
 currWalkSpeed = 0
 
@@ -5,19 +7,34 @@ jumpForce = 3
 currGravity = 0
 grounded = false
 
+tileMapID = layer_tilemap_get_id("Blocks");
 
+
+#region states
+enterGroundState = function() {
+	
+	state = groundState
+}
 groundState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpInput = keyboard_check_pressed(vk_space)
 	
 	currWalkSpeed = horizontalInput * walkSpeed
 	if jumpInput {
-		currGravity = jumpForce; grounded = false
+		currGravity = jumpForce;
+		grounded = false
 		state = airState
 	}
 	
 	HandleMovementX(currWalkSpeed)
 	CheckIfWalkOffEdge()
+}
+
+
+enterAirState = function() {
+	currGravity = jumpForce;
+	grounded = false
+	state = airState
 }
 airState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
@@ -28,5 +45,6 @@ airState = function() {
 	HandleMovementX(currWalkSpeed)
 	HandleMovementY(currGravity)
 }
+#endregion
 
 state = airState

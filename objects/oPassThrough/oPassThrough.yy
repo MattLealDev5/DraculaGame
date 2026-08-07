@@ -9,10 +9,7 @@
     "name":"Objects",
     "path":"folders/Platforms/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"oPlatform",
-    "path":"objects/oPlatform/oPlatform.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
