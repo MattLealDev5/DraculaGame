@@ -24,14 +24,13 @@ function HandleMovementY(ySpd) {
 		
 		var standing = instance_place(x, y+1, tileMapID)
 		if standing {
-			//y = standing.y
-			state = groundState
-			grounded = true
-			currGravity = 0
+			move_snap(0, 16);
+			enterGroundState()
 		}
 	}
 	
-	// Passthrough
+	// Passthrough (Currently unused, figure out later if so desired)
+	// Will probably reuse it for object collisions and shizzamzos
 	var standingP = instance_place(x, y+1, oPassThrough)
 	if standingP && y < standingP.y {
 		var yInc = -sign(ySpd)

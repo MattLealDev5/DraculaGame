@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sPlayer_Test",
-    "path":"sprites/sPlayer_Test/sPlayer_Test.yy",
+    "name":"mskPlayer",
+    "path":"sprites/mskPlayer/mskPlayer.yy",
   },
   "spriteMaskId":null,
   "visible":true,
