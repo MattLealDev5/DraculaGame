@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrPhysics",
+  "%Name":"scrPhysicsPlayer",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrPhysics",
+  "name":"scrPhysicsPlayer",
   "parent":{
     "name":"Scripts",
     "path":"folders/Player/Scripts.yy",

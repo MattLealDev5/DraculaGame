@@ -2,6 +2,7 @@ function HandleMovementX(xSpd) {
 	x += xSpd
 	if place_meeting(x, y, tileMapID) {
 		var xInc = -sign(xSpd)
+		if xInc == 0 { xInc=1 }
 		while place_meeting(x, y, tileMapID) {
 			x += xInc
 		}
@@ -12,6 +13,7 @@ function HandleMovementY(ySpd) {
 	y -= ySpd
 	if place_meeting(x, y, tileMapID) {
 		var yInc = -sign(ySpd)
+		if yInc == 0 { yInc=1 }
 		while place_meeting(x, y, tileMapID) {
 			y -= yInc
 		}
@@ -49,7 +51,9 @@ function CheckIfWalkOffEdge() {
 	if !place_meeting(x, y+1, tileMapID) && !CheckPassThrough()  {
 		grounded = false
 		state = airState
+		return true
 	}
+	return false
 }
 
 function CheckPassThrough() {

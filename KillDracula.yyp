@@ -32,7 +32,7 @@
     {"id":{"name":"oPlatform","path":"objects/oPlatform/oPlatform.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"scrPhysics","path":"scripts/scrPhysics/scrPhysics.yy",},},
+    {"id":{"name":"scrPhysicsPlayer","path":"scripts/scrPhysicsPlayer/scrPhysicsPlayer.yy",},},
     {"id":{"name":"mskPlayer_Slide","path":"sprites/mskPlayer_Slide/mskPlayer_Slide.yy",},},
     {"id":{"name":"mskPlayer","path":"sprites/mskPlayer/mskPlayer.yy",},},
     {"id":{"name":"sBlocks","path":"sprites/sBlocks/sBlocks.yy",},},
