@@ -45,7 +45,7 @@ groundState = function() {
 
 #region Airbourne State
 enterAirState = function() {
-	//sprite = sPlayer
+	sprite = sPlayer_Jump
 	mask_index = mskPlayer
 	currGravity = jumpForce;
 	grounded = false
@@ -103,7 +103,7 @@ slideState = function() {
 
 #region Slide Jump State
 enterSlideJumpState = function() {
-	//sprite = sPlayer
+	sprite = sPlayer_Jump
 	mask_index = mskPlayer
 	currGravity = slideJumpForce;
 	grounded = false

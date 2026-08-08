@@ -43,6 +43,7 @@
     {"id":{"name":"sBlocks","path":"sprites/sBlocks/sBlocks.yy",},},
     {"id":{"name":"sPassThrough","path":"sprites/sPassThrough/sPassThrough.yy",},},
     {"id":{"name":"sPlatform","path":"sprites/sPlatform/sPlatform.yy",},},
+    {"id":{"name":"sPlayer_Jump","path":"sprites/sPlayer_Jump/sPlayer_Jump.yy",},},
     {"id":{"name":"sPlayer_Slide","path":"sprites/sPlayer_Slide/sPlayer_Slide.yy",},},
     {"id":{"name":"sPlayer_Walk","path":"sprites/sPlayer_Walk/sPlayer_Walk.yy",},},
     {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},},
