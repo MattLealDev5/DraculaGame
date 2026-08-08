@@ -6,7 +6,7 @@ currWalkSpeed = 0
 
 slideSpeed = 2
 slideTimer = 0
-slideTimerSet = 15
+slideTimerSet = 22
 
 jumpForce = 3
 currGravity = 0
@@ -50,10 +50,12 @@ enterAirState = function() {
 }
 airState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
+	var jumpReleased = keyboard_check_released(ord("P"))
 	
 	currGravity -= 0.1
 	currWalkSpeed = horizontalInput * walkSpeed
 	if horizontalInput != 0 { facing = horizontalInput }
+	if currGravity > 0 && jumpReleased { currGravity = 0 }
 	
 	HandleMovementX(currWalkSpeed)
 	HandleMovementY(currGravity)
