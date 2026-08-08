@@ -1,8 +1,7 @@
 function HandleMovementX(xSpd) {
 	x += xSpd
 	if place_meeting(x, y, tileMapID) {
-		var xInc = -sign(xSpd)
-		if xInc == 0 { yInc=-facing }
+		var xInc = xSpd != 0 ? -sign(xSpd) : xInc = -facing
 		while place_meeting(x, y, tileMapID) {
 			x += xInc
 		}
@@ -12,8 +11,7 @@ function HandleMovementX(xSpd) {
 function HandleMovementY(ySpd) {
 	y -= ySpd
 	if place_meeting(x, y, tileMapID) {
-		var yInc = -sign(ySpd)
-		if yInc == 0 { yInc=-1 }
+		var yInc = ySpd != 0 ? -sign(ySpd) : yInc = -1
 		while place_meeting(x, y, tileMapID) {
 			y -= yInc
 		}

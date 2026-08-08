@@ -23,8 +23,8 @@
   ],
   "name":"Room1",
   "parent":{
-    "name":"KillDracula",
-    "path":"KillDracula.yyp",
+    "name":"Rooms",
+    "path":"folders/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
