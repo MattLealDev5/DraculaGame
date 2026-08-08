@@ -1,8 +1,7 @@
 function HandleMovementX(xSpd) {
 	x += xSpd
 	if place_meeting(x, y, tileMapID) {
-		var xInc = -sign(xSpd)
-		if xInc == 0 { xInc=1 }
+		var xInc = -sign(facing)
 		while place_meeting(x, y, tileMapID) {
 			x += xInc
 		}

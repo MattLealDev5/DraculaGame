@@ -1,4 +1,5 @@
 sprite = sPlayer
+facing = 1
 
 walkSpeed = 1
 currWalkSpeed = 0
@@ -28,6 +29,7 @@ groundState = function() {
 	var slideInput = keyboard_check(ord("S"))
 	
 	currWalkSpeed = horizontalInput * walkSpeed
+	if horizontalInput != 0 { facing = horizontalInput }
 	if jumpInput {
 		if slideInput { enterSlideState() }
 		else { enterAirState() }
@@ -51,6 +53,7 @@ airState = function() {
 	
 	currGravity -= 0.1
 	currWalkSpeed = horizontalInput * walkSpeed
+	if horizontalInput != 0 { facing = horizontalInput }
 	
 	HandleMovementX(currWalkSpeed)
 	HandleMovementY(currGravity)
@@ -69,16 +72,25 @@ slideState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpInput = keyboard_check_pressed(ord("P"))
 	
-	if jumpInput {
-		enterAirState()
-	}
-	
-	HandleMovementX(slideSpeed)
+	HandleMovementX(slideSpeed*facing)
 	CheckIfWalkOffEdge()
-	
 	slideTimer--;
-	if slideTimer <= 0 || place_meeting(x+1, y, tileMapID) {
-		enterGroundState()
+	
+	if place_meeting(x, y-9, tileMapID) {
+		if horizontalInput != 0 { facing = horizontalInput }
+	} else {
+		if jumpInput {
+			enterAirState()
+		}
+		
+		if horizontalInput != 0 && horizontalInput != facing {
+			facing = horizontalInput
+			enterGroundState()
+		}
+	
+		if slideTimer <= 0 || place_meeting(x+facing, y, tileMapID) {
+			enterGroundState()
+		}
 	}
 }
 #endregion
