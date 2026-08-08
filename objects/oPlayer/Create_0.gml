@@ -7,9 +7,12 @@ currWalkSpeed = 0
 slideSpeed = 2
 slideTimer = 0
 slideTimerSet = 22
+slideJumpFacing = 1
 
-jumpForce = 3
+jumpForce = 2.5
+slideJumpForce = 3
 currGravity = 0
+incrementGravity = 0.1
 grounded = false
 
 tileMapID = layer_tilemap_get_id("Blocks");
@@ -52,7 +55,7 @@ airState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpReleased = keyboard_check_released(ord("P"))
 	
-	currGravity -= 0.1
+	currGravity -= incrementGravity
 	currWalkSpeed = horizontalInput * walkSpeed
 	if horizontalInput != 0 { facing = horizontalInput }
 	if currGravity > 0 && jumpReleased { currGravity = 0 }
@@ -82,7 +85,7 @@ slideState = function() {
 		if horizontalInput != 0 { facing = horizontalInput }
 	} else {
 		if jumpInput {
-			enterAirState()
+			enterSlideJumpState()
 		}
 		
 		if horizontalInput != 0 && horizontalInput != facing {
@@ -94,6 +97,29 @@ slideState = function() {
 			enterGroundState()
 		}
 	}
+}
+#endregion
+
+
+#region Slide Jump State
+enterSlideJumpState = function() {
+	//sprite = sPlayer
+	mask_index = mskPlayer
+	currGravity = slideJumpForce;
+	grounded = false
+	slideJumpFacing = facing
+	state = slideJumpState
+}
+slideJumpState = function() {
+	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
+	var jumpReleased = keyboard_check_released(ord("P"))
+	
+	currGravity -= incrementGravity
+	if horizontalInput != 0 { facing = horizontalInput }
+	if currGravity > 0 && jumpReleased { currGravity = 0 }
+	
+	HandleMovementX(slideSpeed*slideJumpFacing)
+	HandleMovementY(currGravity)
 }
 #endregion
 
