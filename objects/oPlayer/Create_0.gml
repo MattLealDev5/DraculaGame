@@ -1,4 +1,4 @@
-sprite = sPlayer
+animCont = AnimationController(sPlayer)
 facing = 1
 
 walkSpeed = 1
@@ -20,7 +20,7 @@ tileMapID = layer_tilemap_get_id("Blocks");
 
 #region Grounded State
 enterGroundState = function() {
-	sprite = sPlayer
+	ChangeAnimation(animCont, sPlayer)
 	mask_index = mskPlayer
 	grounded = true
 	currGravity = 0
@@ -45,7 +45,7 @@ groundState = function() {
 
 #region Airbourne State
 enterAirState = function() {
-	sprite = sPlayer_Jump
+	ChangeAnimation(animCont, sPlayer_Jump)
 	mask_index = mskPlayer
 	currGravity = jumpForce;
 	grounded = false
@@ -67,7 +67,7 @@ airState = function() {
 
 #region Slide State
 enterSlideState = function() {
-	sprite = sPlayer_Slide
+	ChangeAnimation(animCont, sPlayer_Slide)
 	mask_index = mskPlayer_Slide
 	slideTimer = slideTimerSet
 	currWalkSpeed = 0
@@ -103,7 +103,7 @@ slideState = function() {
 
 #region Slide Jump State
 enterSlideJumpState = function() {
-	sprite = sPlayer_Jump
+	ChangeAnimation(animCont, sPlayer_Jump)
 	mask_index = mskPlayer
 	currGravity = slideJumpForce;
 	grounded = false
