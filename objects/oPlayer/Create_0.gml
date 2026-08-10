@@ -31,8 +31,32 @@ groundState = function() {
 	var jumpInput = keyboard_check_pressed(ord("P"))
 	var slideInput = keyboard_check(ord("S"))
 	
+	if horizontalInput != 0 { enterWalkingState() }
+	if jumpInput {
+		if slideInput { enterSlideState() }
+		else { enterAirState() }
+	}
+	
+	CheckIfWalkOffEdge()
+}
+#endregion
+
+#region Walking State
+enterWalkingState = function() {
+	ChangeAnimation(animCont, sPlayer_Walk)
+	mask_index = mskPlayer
+	grounded = true
+	currGravity = 0
+	state = walkingState
+}
+walkingState = function() {
+	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
+	var jumpInput = keyboard_check_pressed(ord("P"))
+	var slideInput = keyboard_check(ord("S"))
+	
 	currWalkSpeed = horizontalInput * walkSpeed
 	if horizontalInput != 0 { facing = horizontalInput }
+	else { enterGroundState() }
 	if jumpInput {
 		if slideInput { enterSlideState() }
 		else { enterAirState() }
