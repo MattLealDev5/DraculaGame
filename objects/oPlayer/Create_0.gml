@@ -15,6 +15,23 @@ currGravity = 0
 incrementGravity = 0.1
 grounded = false
 
+bulletBank = [instance_create_layer(x, y, "Instances", oBullet),
+			  instance_create_layer(x, y, "Instances", oBullet),
+			  instance_create_layer(x, y, "Instances", oBullet)]
+shootBullet = function() {
+	var shot = array_pop(bulletBank)
+	if !is_undefined(shot) {
+		shot.x = x+10*facing
+		shot.y = y-9
+		shot.facing = facing
+		shot.active = true
+	}
+}
+returnBullet = function(shot) {
+	shot.active = false
+	array_push(bulletBank, shot)
+}
+
 tileMapID = layer_tilemap_get_id("Blocks");
 
 
@@ -29,6 +46,7 @@ enterGroundState = function() {
 groundState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpInput = keyboard_check_pressed(ord("P"))
+	var shootInput = keyboard_check_pressed(ord("L"))
 	var slideInput = keyboard_check(ord("S"))
 	
 	if horizontalInput != 0 { enterWalkingState() }
@@ -36,6 +54,7 @@ groundState = function() {
 		if slideInput { enterSlideState() }
 		else { enterAirState() }
 	}
+	if shootInput { shootBullet() }
 	
 	CheckIfWalkOffEdge()
 }
@@ -52,6 +71,7 @@ enterWalkingState = function() {
 walkingState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpInput = keyboard_check_pressed(ord("P"))
+	var shootInput = keyboard_check_pressed(ord("L"))
 	var slideInput = keyboard_check(ord("S"))
 	
 	currWalkSpeed = horizontalInput * walkSpeed
@@ -61,6 +81,7 @@ walkingState = function() {
 		if slideInput { enterSlideState() }
 		else { enterAirState() }
 	}
+	if shootInput { shootBullet() }
 	
 	HandleMovementX(currWalkSpeed)
 	CheckIfWalkOffEdge()
@@ -78,11 +99,13 @@ enterAirState = function() {
 airState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpReleased = keyboard_check_released(ord("P"))
+	var shootInput = keyboard_check_pressed(ord("L"))
 	
 	currGravity -= incrementGravity
 	currWalkSpeed = horizontalInput * walkSpeed
 	if horizontalInput != 0 { facing = horizontalInput }
 	if currGravity > 0 && jumpReleased { currGravity = 0 }
+	if shootInput { shootBullet() }
 	
 	HandleMovementX(currWalkSpeed)
 	HandleMovementY(currGravity)
@@ -137,10 +160,12 @@ enterSlideJumpState = function() {
 slideJumpState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var jumpReleased = keyboard_check_released(ord("P"))
+	var shootInput = keyboard_check_pressed(ord("L"))
 	
 	currGravity -= incrementGravity
 	if horizontalInput != 0 { facing = horizontalInput }
 	if currGravity > 0 && jumpReleased { currGravity = 0 }
+	if shootInput { shootBullet() }
 	
 	HandleMovementX(slideSpeed*slideJumpFacing)
 	HandleMovementY(currGravity)

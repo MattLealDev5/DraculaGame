@@ -29,6 +29,7 @@
   },
   "name":"KillDracula",
   "resources":[
+    {"id":{"name":"oBullet","path":"objects/oBullet/oBullet.yy",},},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
     {"id":{"name":"oDebug","path":"objects/oDebug/oDebug.yy",},},
     {"id":{"name":"oInstantiate","path":"objects/oInstantiate/oInstantiate.yy",},},
@@ -42,6 +43,7 @@
     {"id":{"name":"mskPlayer_Slide","path":"sprites/mskPlayer_Slide/mskPlayer_Slide.yy",},},
     {"id":{"name":"mskPlayer","path":"sprites/mskPlayer/mskPlayer.yy",},},
     {"id":{"name":"sBlocks","path":"sprites/sBlocks/sBlocks.yy",},},
+    {"id":{"name":"sBullet","path":"sprites/sBullet/sBullet.yy",},},
     {"id":{"name":"sPassThrough","path":"sprites/sPassThrough/sPassThrough.yy",},},
     {"id":{"name":"sPlatform","path":"sprites/sPlatform/sPlatform.yy",},},
     {"id":{"name":"sPlayer_Jump","path":"sprites/sPlayer_Jump/sPlayer_Jump.yy",},},
