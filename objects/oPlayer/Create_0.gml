@@ -8,6 +8,8 @@ slideSpeed = 2
 slideTimer = 0
 slideTimerSet = 22
 slideJumpFacing = 1
+slideCoyoteTime = 0
+slideCoyoteTimeSet = 10
 
 jumpForce = 2.5
 slideJumpForce = 3
@@ -15,6 +17,7 @@ currGravity = 0
 incrementGravity = 0.1
 grounded = false
 
+#region Shooting
 bulletBank = [instance_create_layer(x, y, "Instances", oBullet),
 			  instance_create_layer(x, y, "Instances", oBullet),
 			  instance_create_layer(x, y, "Instances", oBullet)]
@@ -31,6 +34,7 @@ returnBullet = function(shot) {
 	shot.active = false
 	array_push(bulletBank, shot)
 }
+#endregion
 
 tileMapID = layer_tilemap_get_id("Blocks");
 
@@ -56,7 +60,9 @@ groundState = function() {
 	}
 	if shootInput { shootBullet() }
 	
-	CheckIfWalkOffEdge()
+	if CheckIfWalkOffEdge() {
+		enterAirState(false)
+	}
 }
 #endregion
 
@@ -84,15 +90,17 @@ walkingState = function() {
 	if shootInput { shootBullet() }
 	
 	HandleMovementX(currWalkSpeed)
-	CheckIfWalkOffEdge()
+	if CheckIfWalkOffEdge() {
+		enterAirState(false)
+	}
 }
 #endregion
 
 #region Airbourne State
-enterAirState = function() {
+enterAirState = function(jump = true) {
 	ChangeAnimation(animCont, sPlayer_Jump)
 	mask_index = mskPlayer
-	currGravity = jumpForce;
+	currGravity = jump ? jumpForce : 0;
 	grounded = false
 	state = airState
 }
@@ -118,6 +126,7 @@ enterSlideState = function() {
 	mask_index = mskPlayer_Slide
 	slideTimer = slideTimerSet
 	currWalkSpeed = 0
+	slideCoyoteTime = slideCoyoteTimeSet
 	state = slideState
 }
 slideState = function() {
@@ -125,7 +134,9 @@ slideState = function() {
 	var jumpInput = keyboard_check_pressed(ord("P"))
 	
 	HandleMovementX(slideSpeed*facing)
-	CheckIfWalkOffEdge()
+	if CheckIfWalkOffEdge() {
+		enterAirState(false)
+	}
 	slideTimer--;
 	
 	if place_meeting(x, y-9, tileMapID) {

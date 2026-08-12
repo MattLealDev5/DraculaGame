@@ -46,12 +46,7 @@ function HandleMovementY(ySpd) {
 }
 
 function CheckIfWalkOffEdge() {
-	if !place_meeting(x, y+1, tileMapID) && !CheckPassThrough()  {
-		grounded = false
-		state = airState
-		return true
-	}
-	return false
+	return !place_meeting(x, y+1, tileMapID) // && !CheckPassThrough()
 }
 
 function CheckPassThrough() {
