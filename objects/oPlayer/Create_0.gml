@@ -8,14 +8,14 @@ slideSpeed = 2
 slideTimer = 0
 slideTimerSet = 22
 slideJumpFacing = 1
-slideCoyoteTime = 0
-slideCoyoteTimeSet = 10
 
 jumpForce = 2.5
 slideJumpForce = 3
 currGravity = 0
 incrementGravity = 0.1
 grounded = false
+coyoteTime = 0
+coyoteTimeSet = 8
 
 #region Shooting
 bulletBank = [instance_create_layer(x, y, "Instances", oBullet),
@@ -45,6 +45,7 @@ enterGroundState = function() {
 	mask_index = mskPlayer
 	grounded = true
 	currGravity = 0
+	coyoteTime = coyoteTimeSet
 	state = groundState
 }
 groundState = function() {
@@ -100,15 +101,24 @@ walkingState = function() {
 enterAirState = function(jump = true) {
 	ChangeAnimation(animCont, sPlayer_Jump)
 	mask_index = mskPlayer
-	currGravity = jump ? jumpForce : 0;
+	currGravity = jump ? jumpForce : 0
+	coyoteTime = jump ? 0 : coyoteTime
 	grounded = false
 	state = airState
 }
 airState = function() {
 	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
+	var jumpInput = keyboard_check_pressed(ord("P"))
 	var jumpReleased = keyboard_check_released(ord("P"))
 	var shootInput = keyboard_check_pressed(ord("L"))
 	
+	if coyoteTime > 0 {
+		if jumpInput {
+			currGravity = jumpForce
+			coyoteTime = 0
+		}
+		coyoteTime--
+	}
 	currGravity -= incrementGravity
 	currWalkSpeed = horizontalInput * walkSpeed
 	if horizontalInput != 0 { facing = horizontalInput }
@@ -126,7 +136,6 @@ enterSlideState = function() {
 	mask_index = mskPlayer_Slide
 	slideTimer = slideTimerSet
 	currWalkSpeed = 0
-	slideCoyoteTime = slideCoyoteTimeSet
 	state = slideState
 }
 slideState = function() {
@@ -135,7 +144,8 @@ slideState = function() {
 	
 	HandleMovementX(slideSpeed*facing)
 	if CheckIfWalkOffEdge() {
-		enterAirState(false)
+		if coyoteTime <= 0 { enterAirState(false) }
+		coyoteTime--
 	}
 	slideTimer--;
 	
