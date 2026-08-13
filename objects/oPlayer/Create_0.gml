@@ -15,7 +15,7 @@ currGravity = 0
 incrementGravity = 0.1
 grounded = false
 coyoteTime = 0
-coyoteTimeSet = 8
+coyoteTimeSet = 5
 
 #region Shooting
 bulletBank = [instance_create_layer(x, y, "Instances", oBullet),

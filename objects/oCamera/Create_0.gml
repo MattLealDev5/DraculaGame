@@ -1,4 +1,6 @@
 x = 0; y = 0
+
+player = instance_find(oPlayer, 0)
 	
 view_width = 240;
 view_height = 180;
