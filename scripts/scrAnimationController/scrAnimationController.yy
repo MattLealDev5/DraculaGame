@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrAnimation",
+  "%Name":"scrAnimationController",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrAnimation",
+  "name":"scrAnimationController",
   "parent":{
     "name":"Scripts",
     "path":"folders/Player/Scripts.yy",

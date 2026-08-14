@@ -38,7 +38,7 @@
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
     {"id":{"name":"rmInstantiate","path":"rooms/rmInstantiate/rmInstantiate.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"scrAnimation","path":"scripts/scrAnimation/scrAnimation.yy",},},
+    {"id":{"name":"scrAnimationController","path":"scripts/scrAnimationController/scrAnimationController.yy",},},
     {"id":{"name":"scrInputController","path":"scripts/scrInputController/scrInputController.yy",},},
     {"id":{"name":"scrPhysicsPlayer","path":"scripts/scrPhysicsPlayer/scrPhysicsPlayer.yy",},},
     {"id":{"name":"mskPlayer_Slide","path":"sprites/mskPlayer_Slide/mskPlayer_Slide.yy",},},

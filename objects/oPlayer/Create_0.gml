@@ -1,4 +1,6 @@
 animCont = AnimationController(sPlayer)
+inputCont = InputController()
+
 facing = 1
 
 walkSpeed = 1
@@ -49,20 +51,15 @@ enterGroundState = function() {
 	state = groundState
 }
 groundState = function() {
-	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-	var jumpInput = keyboard_check_pressed(ord("P"))
-	var shootInput = keyboard_check_pressed(ord("L"))
-	var slideInput = keyboard_check(ord("S"))
-	
-	if horizontalInput != 0 { enterWalkingState() }
-	if jumpInput {
-		if slideInput { enterSlideState() }
-		else { enterAirState() }
+	if inputCont.walkDir() != 0 { enterWalkingState() }
+	if inputCont.jump() {
+		if inputCont.slide() { enterSlideState() }
+		else { enterJumpState() }
 	}
-	if shootInput { shootBullet() }
+	if inputCont.shoot() { shootBullet() }
 	
 	if CheckIfWalkOffEdge() {
-		enterAirState(false)
+		enterAirState()
 	}
 }
 #endregion
@@ -76,54 +73,52 @@ enterWalkingState = function() {
 	state = walkingState
 }
 walkingState = function() {
-	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-	var jumpInput = keyboard_check_pressed(ord("P"))
-	var shootInput = keyboard_check_pressed(ord("L"))
-	var slideInput = keyboard_check(ord("S"))
-	
-	currWalkSpeed = horizontalInput * walkSpeed
-	if horizontalInput != 0 { facing = horizontalInput }
+	currWalkSpeed = inputCont.walkDir() * walkSpeed
+	if inputCont.walkDir() != 0 { facing = inputCont.walkDir() }
 	else { enterGroundState() }
-	if jumpInput {
-		if slideInput { enterSlideState() }
-		else { enterAirState() }
+	if inputCont.jump() {
+		if inputCont.slide() { enterSlideState() }
+		else { enterJumpState() }
 	}
-	if shootInput { shootBullet() }
+	if inputCont.shoot() { shootBullet() }
 	
 	HandleMovementX(currWalkSpeed)
 	if CheckIfWalkOffEdge() {
-		enterAirState(false)
+		enterAirState()
 	}
 }
 #endregion
 
 #region Airbourne State
-enterAirState = function(jump = true) {
+enterAirState = function() {
 	animCont.changeAnimation(sPlayer_Jump)
 	mask_index = mskPlayer
-	currGravity = jump ? jumpForce : 0
-	coyoteTime = jump ? 0 : coyoteTime
+	currGravity = 0
+	coyoteTime = coyoteTime
+	grounded = false
+	state = airState
+}
+enterJumpState = function() {
+	animCont.changeAnimation(sPlayer_Jump)
+	mask_index = mskPlayer
+	currGravity = jumpForce
+	coyoteTime = 0
 	grounded = false
 	state = airState
 }
 airState = function() {
-	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-	var jumpInput = keyboard_check_pressed(ord("P"))
-	var jumpReleased = keyboard_check_released(ord("P"))
-	var shootInput = keyboard_check_pressed(ord("L"))
-	
 	if coyoteTime > 0 {
-		if jumpInput {
+		if inputCont.jump() {
 			currGravity = jumpForce
 			coyoteTime = 0
 		}
 		coyoteTime--
 	}
 	currGravity -= incrementGravity
-	currWalkSpeed = horizontalInput * walkSpeed
-	if horizontalInput != 0 { facing = horizontalInput }
-	if currGravity > 0 && jumpReleased { currGravity = 0 }
-	if shootInput { shootBullet() }
+	currWalkSpeed = inputCont.walkDir() * walkSpeed
+	if inputCont.walkDir() != 0 { facing = inputCont.walkDir() }
+	if currGravity > 0 && inputCont.jumpRelease() { currGravity = 0 }
+	if inputCont.shoot() { shootBullet() }
 	
 	HandleMovementX(currWalkSpeed)
 	HandleMovementY(currGravity)
@@ -139,25 +134,22 @@ enterSlideState = function() {
 	state = slideState
 }
 slideState = function() {
-	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-	var jumpInput = keyboard_check_pressed(ord("P"))
-	
 	HandleMovementX(slideSpeed*facing)
 	if CheckIfWalkOffEdge() {
-		if coyoteTime <= 0 { enterAirState(false) }
+		if coyoteTime <= 0 { enterAirState() }
 		coyoteTime--
 	}
 	slideTimer--;
 	
 	if place_meeting(x, y-9, tileMapID) {
-		if horizontalInput != 0 { facing = horizontalInput }
+		if inputCont.walkDir() != 0 { facing = inputCont.walkDir() }
 	} else {
-		if jumpInput {
+		if inputCont.jump() {
 			enterSlideJumpState()
 		}
 		
-		if horizontalInput != 0 && horizontalInput != facing {
-			facing = horizontalInput
+		if inputCont.walkDir() != 0 && inputCont.walkDir() != facing {
+			facing = inputCont.walkDir()
 			enterGroundState()
 		}
 	
@@ -179,14 +171,10 @@ enterSlideJumpState = function() {
 	state = slideJumpState
 }
 slideJumpState = function() {
-	var horizontalInput = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-	var jumpReleased = keyboard_check_released(ord("P"))
-	var shootInput = keyboard_check_pressed(ord("L"))
-	
 	currGravity -= incrementGravity
-	if horizontalInput != 0 { facing = horizontalInput }
-	if currGravity > 0 && jumpReleased { currGravity = 0 }
-	if shootInput { shootBullet() }
+	if inputCont.walkDir() != 0 { facing = inputCont.walkDir() }
+	if currGravity > 0 && inputCont.jumpRelease() { currGravity = 0 }
+	if inputCont.shoot() { shootBullet() }
 	
 	HandleMovementX(slideSpeed*slideJumpFacing)
 	HandleMovementY(currGravity)
