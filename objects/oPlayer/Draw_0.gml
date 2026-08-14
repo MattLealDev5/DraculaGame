@@ -1,4 +1,4 @@
-PlayAnimation(animCont)
+animCont.playAnimation()
 draw_sprite_ext(animCont.sprite, animCont.frame, x, y, facing, 1, 0, c_white, 1)
 
 //draw_sprite_ext(sprite, 0, x, y, facing, 1, 0, c_white, 1)
