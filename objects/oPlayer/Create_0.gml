@@ -51,7 +51,10 @@ enterGroundState = function() {
 	state = groundState
 }
 groundState = function() {
-	if inputCont.walkDir() != 0 { enterWalkingState() }
+	if inputCont.walkDir() != 0 {
+		facing = inputCont.walkDir()
+		enterWalkingState()
+	}
 	if inputCont.jump() {
 		if inputCont.slide() { enterSlideState() }
 		else { enterJumpState() }

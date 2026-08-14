@@ -3,7 +3,7 @@ if !active { exit; }
 x += bulletSpeed*facing
 
 var bX = x, bY = y
-if x < camera.x || x > camera.x+camera.view_width || 
-y < camera.y || y > camera.y+camera.view_height {
+if x < camera.cameraX || x > camera.cameraX+camera.view_width || 
+y < camera.cameraY || y > camera.cameraY+camera.view_height {
 	player.returnBullet(id)
 }
