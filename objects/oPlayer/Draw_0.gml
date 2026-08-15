@@ -1,5 +1,7 @@
 animCont.playAnimation()
-draw_sprite_ext(animCont.sprite, animCont.frame, x, y, facing, 1, 0, c_white, 1)
+
+var flashing = hurtInvincibility <= 0 || hurtInvincibility % 8 > 4
+draw_sprite_ext(animCont.sprite, animCont.frame, x, y, facing, 1, 0, c_white, flashing)
 
 //draw_sprite_ext(sprite, 0, x, y, facing, 1, 0, c_white, 1)
 //draw_line_colour(0, y, room_width, y, c_aqua, c_aqua)

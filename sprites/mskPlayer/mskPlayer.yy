@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Player/Sprites.yy",
+    "name":"Masks",
+    "path":"folders/Player/Sprites/Masks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

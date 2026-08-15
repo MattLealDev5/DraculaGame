@@ -19,6 +19,11 @@ grounded = false
 coyoteTime = 0
 coyoteTimeSet = 5
 
+hurtTimer = 0
+hurtTimerSet = 30
+hurtInvincibility = 0
+hurtInvincibilitySet = 90
+
 #region Shooting
 bulletBank = [instance_create_layer(x, y, "Instances", oBullet),
 			  instance_create_layer(x, y, "Instances", oBullet),
@@ -30,6 +35,7 @@ shootBullet = function() {
 		shot.y = y-9
 		shot.facing = facing
 		shot.active = true
+		shot.mask_index = mskBullet_Small
 	}
 }
 returnBullet = function(shot) {
@@ -181,6 +187,30 @@ slideJumpState = function() {
 	
 	HandleMovementX(slideSpeed*slideJumpFacing)
 	HandleMovementY(currGravity)
+}
+#endregion
+
+
+#region Hurt State
+enterHurtState = function() {
+	animCont.changeAnimation(sPlayer_Jump)
+	mask_index = mskPlayer
+	currGravity = 0;
+	grounded = false
+	hurtTimer = hurtTimerSet
+	hurtInvincibility = hurtInvincibilitySet
+	state = hurtState
+}
+hurtState = function() {
+	currGravity -= incrementGravity
+	
+	HandleMovementX(-facing*walkSpeed/2)
+	//HandleMovementY(currGravity)
+	
+	hurtTimer--
+	if hurtTimer <= 0 {
+		enterAirState()
+	}
 }
 #endregion
 
