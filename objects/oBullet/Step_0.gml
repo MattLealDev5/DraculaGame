@@ -2,8 +2,6 @@ if !active { exit; }
 
 x += bulletSpeed*facing
 
-var bX = x, bY = y
-
 var enemy = instance_place(x, y, oEnemy)
 if enemy != noone {
 	enemy.takeDamage(damage)
