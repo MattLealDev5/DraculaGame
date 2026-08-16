@@ -1,5 +1,5 @@
-animCont = AnimationController(sPlayer)
-inputCont = InputController()
+animCont = new AnimationController(sPlayer)
+inputCont = new InputController()
 
 facing = 1
 
@@ -103,7 +103,6 @@ enterAirState = function() {
 	animCont.changeAnimation(sPlayer_Jump)
 	mask_index = mskPlayer
 	currGravity = 0
-	coyoteTime = coyoteTime
 	grounded = false
 	state = airState
 }

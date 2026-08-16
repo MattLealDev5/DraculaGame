@@ -1,4 +1,4 @@
-animCont = AnimationController(sPlayer)
+animCont = new AnimationController(sPlayer)
 mask_index = mskPlayer
 tileMapID = layer_tilemap_get_id("Blocks");
 
