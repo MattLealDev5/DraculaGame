@@ -7,8 +7,7 @@ walkSpeed = 1
 currWalkSpeed = 0
 
 slideSpeed = 2
-slideTimer = 0
-slideTimerSet = 22
+slideTimer = 0; slideTimerSet = 22
 slideJumpFacing = 1
 
 jumpForce = 2.5
@@ -16,13 +15,24 @@ slideJumpForce = 3
 currGravity = 0
 incrementGravity = 0.1
 grounded = false
-coyoteTime = 0
-coyoteTimeSet = 5
+coyoteTime = 0; coyoteTimeSet = 5
 
-hurtTimer = 0
-hurtTimerSet = 30
-hurtInvincibility = 0
-hurtInvincibilitySet = 90
+hurtTimer = 0; hurtTimerSet = 30
+hurtInvincibility = 0; hurtInvincibilitySet = 90
+
+#region Health and Damage
+hp = 30
+alive = true
+
+takeDamage = function(dmg) {
+	hp -= dmg
+	if hp <= 0 {
+		enterDeathState()
+	} else {
+		enterHurtState()
+	}
+}
+#endregion
 
 #region Shooting
 bulletBank = [instance_create_layer(x, y, "Instances", oBullet),
@@ -43,6 +53,7 @@ returnBullet = function(shot) {
 	array_push(bulletBank, shot)
 }
 #endregion
+
 
 tileMapID = layer_tilemap_get_id("Blocks");
 
@@ -168,7 +179,6 @@ slideState = function() {
 }
 #endregion
 
-
 #region Slide Jump State
 enterSlideJumpState = function() {
 	animCont.changeAnimation(sPlayer_Jump)
@@ -188,7 +198,6 @@ slideJumpState = function() {
 	HandleMovementY(currGravity)
 }
 #endregion
-
 
 #region Hurt State
 enterHurtState = function() {
@@ -210,6 +219,17 @@ hurtState = function() {
 	if hurtTimer <= 0 {
 		enterAirState()
 	}
+}
+#endregion
+
+
+#region Death State
+enterDeathState = function() {
+	alive = false
+	state = deathState
+}
+deathState = function() {
+	// you dead boi
 }
 #endregion
 

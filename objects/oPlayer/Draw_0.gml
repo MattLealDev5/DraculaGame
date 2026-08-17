@@ -1,3 +1,5 @@
+if !alive { exit; }
+
 animCont.playAnimation()
 
 var flashing = hurtInvincibility <= 0 || hurtInvincibility % 8 > 4
