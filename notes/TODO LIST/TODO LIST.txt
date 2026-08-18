@@ -1,0 +1,14 @@
+CURRENTLY WORKING ON:
+* Enemy Parent Code
+	✓ Making the sin wave have unique movement code and also not screw up enemy parent/children
+	* Enemy air state for walking off or just falling
+
+WILL NEED TO WORK ON:
+* Sprites for enemies
+* Death object and effects
+* 
+
+MINOR THINGS TO WORRY ABOUT LATER
+* Make mask sprites the size of the hitbox for easier code shenanigans
+* Having the low resolution I want without the jump looking weird
+* Jump sprite for regular jumps

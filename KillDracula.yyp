@@ -33,6 +33,7 @@
   },
   "name":"KillDracula",
   "resources":[
+    {"id":{"name":"TODO LIST","path":"notes/TODO LIST/TODO LIST.yy",},},
     {"id":{"name":"oBullet","path":"objects/oBullet/oBullet.yy",},},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
     {"id":{"name":"oDebug","path":"objects/oDebug/oDebug.yy",},},
