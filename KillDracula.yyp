@@ -11,6 +11,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Enemies","folderPath":"folders/Enemies.yy","name":"Enemies","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"SinWave","folderPath":"folders/Enemies/SinWave.yy","name":"SinWave","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Walker","folderPath":"folders/Enemies/Walker.yy","name":"Walker","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Platforms","folderPath":"folders/Platforms.yy","name":"Platforms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Platforms/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -40,6 +41,8 @@
     {"id":{"name":"oPassThrough","path":"objects/oPassThrough/oPassThrough.yy",},},
     {"id":{"name":"oPlatform","path":"objects/oPlatform/oPlatform.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
+    {"id":{"name":"oSinWave","path":"objects/oSinWave/oSinWave.yy",},},
+    {"id":{"name":"oSinWaveSpawner","path":"objects/oSinWaveSpawner/oSinWaveSpawner.yy",},},
     {"id":{"name":"oWalker","path":"objects/oWalker/oWalker.yy",},},
     {"id":{"name":"rmInstantiate","path":"rooms/rmInstantiate/rmInstantiate.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
